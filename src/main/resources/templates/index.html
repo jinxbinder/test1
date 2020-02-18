@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../static/js/vue.js"></script>
 </head>
 <style>
    h1,h2{text-align: center}
@@ -9,16 +11,44 @@
         height: 400px;
         background: #5b43c4;
     }
-
+   [v-cloak]{
+       display: none;
+   }
 </style>
 <body>
 <div class="d1">
     <h1>java项目部署测试</h1>
     <h2>jenkins自动部署测试</h2>
+
 </div>
 <div class="d2"></div>
-</body>
-<script>
+<div id="app">
+    <p v-cloak>{{ msg }}</p>  <!-- 解决加载闪烁     {{}}为插值表达式-->
+    <h1 v-text="msg"></h1>		<!-- 赋值渲染 -->
+    <div v-html="msg2"></div>	<!-- 渲染为html -->
+    <input type="button" v-bind:title="mytitle + '2234'" value="确认" name=""><br>   <!-- 属性绑定 -->
+    <input type="button" :title="mytitle + '4'" value="确认" name="">   <!-- v-bind 简写 : -->
+    <input type="button" value="提交" v-on:click="show" name="">   <!-- 事件绑定 -->
+    <input type="button" value="提交" @click="show" name="">      <!-- v-on  简写  @ -->
+    <input type="text" v-model="msg" name="">    <!-- v-model 数据双向绑定 -->
+</div>
 
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',  //选择区域
+        data: {   //定义属性值
+            msg: '欢迎学习vue',
+            msg2: '<h2>哈哈哈</h2>',
+            mytitle: '自定义title'
+
+        },
+        methods: { //定义方法
+            show: function(){
+                alert("hello world")
+            }
+        }
+    })
 </script>
+</body>
+
 </html>
